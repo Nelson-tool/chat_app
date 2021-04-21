@@ -18,7 +18,7 @@ function Chatbar({messages}) {
             message : input,
             name: "NELSON",
             timestamp: "Just now",
-            received : true
+            received : false
         })
         setInput("")
     }
