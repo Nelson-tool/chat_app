@@ -1,11 +1,11 @@
-import { Avatar, IconButton } from "@material-ui/core";
 import React, { useState } from "react";
-import "./Chatbar.css";
+import { Avatar, IconButton } from "@material-ui/core";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { AttachFile } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
-import axios from "./axios"
+import axios from "./../../api/axios"
+import "./Chatbar.css";
 
 function Chatbar({messages}) {
 

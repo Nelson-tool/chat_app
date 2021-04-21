@@ -1,9 +1,9 @@
-import './App.css';
-import Chatbar from './Chatbar';
-import Sidebar from './Sidebar';
-import Pusher from "pusher-js"
 import { useEffect, useState } from 'react';
-import axios from "./axios"
+import Pusher from "pusher-js"
+import Chatbar from './components/Chatbar';
+import Sidebar from './components/Sidebar';
+import axios from "./api/axios"
+import './App.css';
 
 function App() {
 
