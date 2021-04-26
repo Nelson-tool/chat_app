@@ -39,7 +39,7 @@ function App() {
     <div className="app">  
     <div className= "app_body">
       <Sidebar />
-      <Chatbar  messages={messages} />
+      <Chatbar  messages={messages}/>
       </div>    
     </div>
   );
