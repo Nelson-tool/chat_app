@@ -1,11 +1,11 @@
 import React from "react";
-import "./Sidebar.css";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import { Avatar, IconButton } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ChatIcon from "@material-ui/icons/Chat";
 import { SearchOutlined } from "@material-ui/icons";
-import SidebarChat from "./SidebarChat";
+import SidebarChat from "../SidebarChat";
+import "./Sidebar.css";
 
 function sidebar() {
   return (
