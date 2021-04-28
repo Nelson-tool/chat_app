@@ -6,12 +6,19 @@ import ChatIcon from "@material-ui/icons/Chat";
 import { SearchOutlined } from "@material-ui/icons";
 import SidebarChat from "../SidebarChat";
 import "./Sidebar.css";
+import { useStateProviderValue } from "../../StateProvider";
+
 
 function sidebar() {
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [{ user }, dispatch] = useStateProviderValue();
+
+
   return (
     <div className="sidebar">
       <div className=" sidebar_header">
-        <Avatar src="https://pbs.twimg.com/profile_images/526840492894740481/sFLY60zv_400x400.jpeg" />
+      <Avatar src={user?.photoURL} />
         <div className="sidebar_headerRigth">
           <IconButton>
             <DonutLargeIcon />

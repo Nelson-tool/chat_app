@@ -5,7 +5,7 @@ import Pusher from "pusher";
 import cors from "cors"
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 
 //pusher config
 const pusher = new Pusher({
@@ -23,7 +23,7 @@ app.use(cors())
 
 //mongoconfig
 const connection_url =
-  "mongodb+srv://new-users-chat:nelson1998@cluster0.jnpqv.mongodb.net/chatappDB?retryWrites=true&w=majority";
+"mongodb+srv://new-users-chat:nelson1998@cluster0.jnpqv.mongodb.net/chatappDB?retryWrites=true&w=majority"
 
 mongoose.connect(connection_url, {
   useCreateIndex: true,
@@ -55,6 +55,7 @@ db.once("open", () => {
     } else {
         console.log("error pusher trigger")
     }
+
   });
 });
 

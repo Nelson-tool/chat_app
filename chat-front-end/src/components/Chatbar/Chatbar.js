@@ -5,9 +5,14 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { AttachFile } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import axios from "./../../api/axios"
+import { useStateProviderValue } from "../../StateProvider";
+
 import "./Chatbar.css";
 
 function Chatbar({messages}) {
+
+  const [{ user }, dispatch] = useStateProviderValue();
+
 
     const [input, setInput] = useState()
 
@@ -16,9 +21,9 @@ function Chatbar({messages}) {
 
         await axios.post("/api/v1/messages/new", {
             message : input,
-            name: "NELSON",
-            timestamp: "Just now",
-            received : false
+            name: user.displayName,
+            timestamp: messages.timestamp,
+            received : true
         })
         setInput("")
     }
@@ -47,18 +52,17 @@ function Chatbar({messages}) {
 
       <div className="chat__body">
           {messages.map(messages => (
-               <p className={` chat__message ${messages.received && 'chat__receive'}`}>
-               <span className="chat_name"> {messages.name}</span>
+               <p className={`chat__message ${messages.name === user.displayName   && 'chat__receive'}`}>
+               <span className="chat_name"> {messages.name} </span>
                {messages.message}
                <span className="chat__timesamp">{messages.timestamp}</span>
              </p>
 
           ))}
     
-        <p className= "chat__message chat__receive">
-          <span className="chat_name"> Sony</span>
-          this is a message
-          <span className="chat__timesamp">{new Date().toUTCString()}</span>
+        <p className= " chat__receive">
+          <span className="chat_name">{messages.name}</span>
+               {messages.message}          
         </p>
       </div>
 

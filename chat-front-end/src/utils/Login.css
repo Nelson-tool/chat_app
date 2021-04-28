@@ -1,0 +1,23 @@
+.login {
+    background-color: aliceblue;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+
+}
+
+.login_container{
+    padding: 100xp;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px;
+}
+
+.login_container > button {
+    margin-top: auto;
+    text-transform: inherit !important ;
+    background-color: green  !important;
+    color: white;
+}
