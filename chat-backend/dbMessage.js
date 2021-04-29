@@ -2,10 +2,16 @@ import mongoose from 'mongoose'
 
 const chatschema =  mongoose.Schema({
     
-    message: String,
-    name: String,
-    timestamp:  { type : Date, default: Date.now },
-    received: Boolean,
+    channelName : String,
+    chanel : {
+        message: String,
+        name: String,
+        timestamp:  { type : Date, default: Date.now },
+        received: Boolean,
+        sockedId: Number
+    }
+    
+
 
     
 });

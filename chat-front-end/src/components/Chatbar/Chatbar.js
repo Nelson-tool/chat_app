@@ -23,7 +23,8 @@ function Chatbar({messages}) {
             message : input,
             name: user.displayName,
             timestamp: messages.timestamp,
-            received : true
+            received : true,
+
         })
         setInput("")
     }

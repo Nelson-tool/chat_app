@@ -37,6 +37,7 @@ const db = mongoose.connection;
 db.once("open", () => {
   console.log("DB is connected");
 
+
   const msgCollection = db.collection("messagecontents");
   const changeStream = msgCollection.watch();
 
@@ -46,11 +47,18 @@ db.once("open", () => {
     if (change.operationType === "insert") {
       const messageDetail = change.fullDocument;
 
-      pusher.trigger("messages", "inserted", {
+      try {
+      const auth = pusher.authenticate( messageDetail.sockedId , messageDetail.channelName, messageDetail)
+      } catch (error) {
+        console.log(error)
+      }
+
+      pusher.trigger("presence-channel", "inserted", {
         name: messageDetail.name,
         message: messageDetail.message,
         timestamp: messageDetail.timestamp,
-        received: messageDetail.received
+        received: messageDetail.received,
+        channelName: messageDetail.channelName
       });
     } else {
         console.log("error pusher trigger")

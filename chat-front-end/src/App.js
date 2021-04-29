@@ -13,6 +13,10 @@ function App() {
   const [{ user }, dispatch] = useStateProviderValue();
 
   const [messages, setMessages] = useState([]);
+  const [onlineUsersCount, setOnlineUsersCount] =  useState(0)
+  const [onlineUsers, setOnlineUsers] = useState([]);
+  const [usersRemoved, setUsersRemoved] = useState([]);
+
 
   useEffect(() => {
     axios.get("/api/v1/messages/sync").then((response) => {
@@ -21,11 +25,34 @@ function App() {
   }, []);
 
   useEffect(() => {
+
+
     const pusher = new Pusher("1ef5c9368343640510b9", {
       cluster: "eu",
     });
 
-    var channel = pusher.subscribe("messages");
+    var channel = pusher.subscribe("presence-channel");
+
+     // when a new member successfully subscribes to the channel
+     channel.bind("pusher:subscription_succeeded", (members) => {
+      // total subscribed
+      setOnlineUsersCount(members.count);
+    });
+
+    channel.bind("pusher:member_added", (member) => {
+      // console.log("count",channel.members.count)
+      setOnlineUsersCount(channel.members.count);
+      setOnlineUsers((prevState) => [
+        ...prevState,
+        { name: member.info.name},
+      ]);
+    });
+
+    channel.bind("pusher:member_removed", (member) => {
+      setOnlineUsersCount(channel.members.count);
+      setUsersRemoved((prevState) => [...prevState, member.info.name]);
+    });
+
     channel.bind("inserted", (newMessage) => {
       setMessages([...messages, newMessage]);
     });
@@ -35,6 +62,7 @@ function App() {
       channel.unsubscribe();
     };
   }, [messages]);
+
 
 
   return (
@@ -50,6 +78,7 @@ function App() {
               </Router>
             <Switch>
               <Router path="/"></Router>
+              <Chatbar messages={messages} />
             </Switch>
           </Router>
         </div>
